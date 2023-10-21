@@ -1,0 +1,8 @@
+query GetRepository {
+  node(id: "MDQ6VXNlcjIwMTg4MTI5"){
+   ... on User {
+      name
+      login
+    }
+  }
+}

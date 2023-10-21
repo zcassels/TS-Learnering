@@ -1,0 +1,8 @@
+query GetRepository {
+  repository(owner: "facebook", name: "react"){
+    id
+    nameWithOwner
+    description
+    url
+  }
+}

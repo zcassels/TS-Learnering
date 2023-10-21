@@ -1,0 +1,10 @@
+query GetTypes($fieldName: String!) {
+  __type(name: $fieldName) {
+    name
+    kind
+    description
+    fields {
+      name
+    }
+  }
+}

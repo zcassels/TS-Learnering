@@ -1,0 +1,13 @@
+{
+  organization(login: "zcassels") {
+    repositories(last: 10) {
+      edges {
+        cursor
+        node {
+          name
+          id
+        }
+      }
+    }
+  }
+}

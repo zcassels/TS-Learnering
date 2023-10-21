@@ -1,0 +1,13 @@
+query GetRepos($page) {
+  organization(login: "facebook") {
+    repositories(first: 10, after:"Y3Vyc29yOnYyOpHOAJEF1g==") {
+      pageInfo {
+        hasNextPage,
+        endCursor
+      },
+      nodes {
+        name
+      }
+    }
+  }
+}

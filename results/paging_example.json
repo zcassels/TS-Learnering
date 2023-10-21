@@ -1,0 +1,42 @@
+{
+    "organization": {
+        "repositories": {
+            "pageInfo": {
+                "hasNextPage": true,
+                "endCursor": "Y3Vyc29yOnYyOpHOAJEF1g=="
+            },
+            "nodes": [
+                {
+                    "name": "hhvm"
+                },
+                {
+                    "name": "pyre2"
+                },
+                {
+                    "name": "facebook-android-sdk"
+                },
+                {
+                    "name": "facebook-ios-sdk"
+                },
+                {
+                    "name": "folly"
+                },
+                {
+                    "name": "watchman"
+                },
+                {
+                    "name": "rocksdb"
+                },
+                {
+                    "name": "chef-utils"
+                },
+                {
+                    "name": "mysql-5.6"
+                },
+                {
+                    "name": "buck"
+                }
+            ]
+        }
+    }
+}

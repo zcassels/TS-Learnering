@@ -1,0 +1,20 @@
+{
+  repositoryOwner(login: "zcassels") {
+    repositories(last: 10) {
+      nodes {
+          name
+          id
+          packageJson: object(expression: "main:package.json") {
+                ... on Blob {
+                  byteSize
+                }
+              }
+          readme: object(expression: "main:README.md") {
+                ... on Blob {
+                  byteSize
+                }
+              }
+      }
+    }
+  }
+}
