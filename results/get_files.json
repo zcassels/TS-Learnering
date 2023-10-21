@@ -5,54 +5,72 @@
                 {
                     "name": "node-js-sample",
                     "id": "MDEwOlJlcG9zaXRvcnkxMDIxMTc4MDE=",
-                    "file": null
+                    "packageJson": null,
+                    "readme": null
                 },
                 {
                     "name": "sfdx-simple",
                     "id": "MDEwOlJlcG9zaXRvcnkxMDIxMjM2NzE=",
-                    "file": null
+                    "packageJson": null,
+                    "readme": null
                 },
                 {
                     "name": "sourcelinktestrepo",
                     "id": "MDEwOlJlcG9zaXRvcnkxMDUwNjExODA=",
-                    "file": null
+                    "packageJson": null,
+                    "readme": null
                 },
                 {
                     "name": "sfdx-chocolatey-installer",
                     "id": "MDEwOlJlcG9zaXRvcnkxMTEyNTE0NjI=",
-                    "file": null
+                    "packageJson": null,
+                    "readme": null
                 },
                 {
                     "name": "JenkinsDemo",
                     "id": "MDEwOlJlcG9zaXRvcnkxNDc3Mjc5ODQ=",
-                    "file": null
+                    "packageJson": null,
+                    "readme": null
                 },
                 {
                     "name": "Spinnaker-linktest",
                     "id": "MDEwOlJlcG9zaXRvcnkyMTQ0OTU2NzI=",
-                    "file": null
+                    "packageJson": null,
+                    "readme": null
                 },
                 {
                     "name": "TeamCityDemo",
                     "id": "MDEwOlJlcG9zaXRvcnkyNzU0MzEyODk=",
-                    "file": null
+                    "packageJson": null,
+                    "readme": null
                 },
                 {
                     "name": "DotNetVisualizer",
                     "id": "R_kgDOIhJsWQ",
-                    "file": null
+                    "packageJson": null,
+                    "readme": {
+                        "byteSize": 18
+                    }
                 },
                 {
                     "name": "NpmBenchmark",
                     "id": "R_kgDOKXuumA",
-                    "file": {
+                    "packageJson": {
                         "byteSize": 569
+                    },
+                    "readme": {
+                        "byteSize": 14
                     }
                 },
                 {
-                    "name": "TS-Learnering",
+                    "name": "Github-GraphQL-Examples",
                     "id": "R_kgDOKi6hGw",
-                    "file": null
+                    "packageJson": {
+                        "byteSize": 272
+                    },
+                    "readme": {
+                        "byteSize": 15
+                    }
                 }
             ]
         }

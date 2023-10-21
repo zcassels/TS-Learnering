@@ -2,7 +2,7 @@
   "name": "examples",
   "version": "0.0.1",
   "scripts": {
-    "watch": "tsc"
+    "start": "tsc && node ./dist/index.js"
   },
   "type": "module",
   "dependencies": {
