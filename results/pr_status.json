@@ -1,0 +1,80 @@
+{
+    "repository": {
+        "defaultBranchRef": {
+            "name": "main"
+        },
+        "pullRequests": {
+            "totalCount": 261,
+            "edges": [
+                {
+                    "node": {
+                        "number": 27565,
+                        "title": "refactor import {type ViewConfig} to import type {ViewConfig}"
+                    }
+                },
+                {
+                    "node": {
+                        "number": 27525,
+                        "title": "Allow `useEffect(fn, undefined)` in `react-hooks/exhaustive-deps`."
+                    }
+                },
+                {
+                    "node": {
+                        "number": 27477,
+                        "title": "Fix typo"
+                    }
+                },
+                {
+                    "node": {
+                        "number": 27446,
+                        "title": "updated readme"
+                    }
+                },
+                {
+                    "node": {
+                        "number": 27416,
+                        "title": "Resolved grammatical errors and typos"
+                    }
+                },
+                {
+                    "node": {
+                        "number": 27414,
+                        "title": "feat: support Micro-Frontend mode and Module Federation modules"
+                    }
+                },
+                {
+                    "node": {
+                        "number": 27354,
+                        "title": "Ouput directory "
+                    }
+                },
+                {
+                    "node": {
+                        "number": 27348,
+                        "title": "Update README.md"
+                    }
+                },
+                {
+                    "node": {
+                        "number": 27293,
+                        "title": "Update ReactErrorUtils.js"
+                    }
+                },
+                {
+                    "node": {
+                        "number": 27272,
+                        "title": "Adds optional context as parameter to FiberRoot constructor"
+                    }
+                }
+            ]
+        }
+    },
+    "viewerCreated": {
+        "totalCount": 0,
+        "edges": []
+    },
+    "reviewRequested": {
+        "totalCount": 0,
+        "edges": []
+    }
+}
