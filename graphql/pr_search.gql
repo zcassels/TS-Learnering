@@ -1,7 +1,7 @@
 fragment pr on PullRequest { number, title }
 
-query PullRequestStatus($query: String!, $per_page: Int = 10) {
-    viewerCreated: search(query: $query, type: ISSUE, first: $per_page) {
+query PullRequestStatus($prSearch: String!, $per_page: Int = 10) {
+    viewerCreated: search(query: $prSearch, type: ISSUE, first: $per_page) {
         totalCount: issueCount
         edges {
             node {
