@@ -12,5 +12,8 @@
   },
   "bin": {
     "gh-fields": "node ./dist/fields.js"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.9"
   }
 }
