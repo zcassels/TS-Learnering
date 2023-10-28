@@ -27,6 +27,7 @@ interface Lanuage {
 }
 
 interface Ref {
+    name: string
     target: Commit
 }
 
@@ -42,8 +43,20 @@ interface CommitStatus {
     state: string
 }
 
+interface PullRequest {
+    number: number
+    title: string
+}
+
+interface PrsConnection {
+    nodes: PullRequest[]
+} 
+
 interface Commit {
+    name: string
+    prefix: string
     status: CommitStatus
+    associatedPullRequests: PrsConnection
 }
 
 interface Repository {
@@ -57,6 +70,7 @@ interface Repository {
     defaultBranchRef: Ref
     latestRelease?: Release
     file?: Blob
+    ref: Commit
 }
 interface PageInfo {
     hasNextPage: boolean
@@ -148,49 +162,49 @@ class PagedFetcher<T>
 
 async function getMetadata(org) {
     const paged_query = `
-    query GetRepos($org:String!, $pageSize:Int!, $cursor:String) {
-      organization(login: $org) {
-        repositories(first: $pageSize, after: $cursor) {
-          pageInfo {
-            hasNextPage,
-            endCursor
-          }
-          totalCount
-          nodes {
-            name
-            description
-            isArchived
-            pushedAt
-            updatedAt
-            createdAt
-            defaultBranchRef {
+    query GetRepos($org: String!, $pageSize: Int!, $cursor: String) {
+        organization(login: $org) {
+          repositories(first: $pageSize, after: $cursor) {
+            pageInfo {
+              hasNextPage
+              endCursor
+            }
+            totalCount
+            nodes {
+              name
+              description
+              isArchived
+              pushedAt
+              updatedAt
+              createdAt
+              defaultBranchRef {
                 name
                 target {
-                    ... on Commit {
-                        status {
-                            contexts {
-                              context
-                              state
-                              targetUrl
-                              createdAt
-                            }
-                            state
-                        }
+                  ... on Commit {
+                    status {
+                      contexts {
+                        context
+                        state
+                        targetUrl
+                        createdAt
+                      }
+                      state
                     }
+                  }
                 }
-            }
-            languages(first: 3) {
+              }
+              languages(first: 3) {
                 nodes {
-                    name
+                  name
                 }
-            }
-            latestRelease {
-              name
+              }
+              latestRelease {
+                name
+              }
             }
           }
         }
       }
-    }
     `
     
     
@@ -242,6 +256,145 @@ async function getMetadata(org) {
     }
 }
 
+async function queryFileAndStatus(org, file, branch) {
+    const paged_query = `
+    query GetRepos($org: String!, $pageSize: Int!, $cursor: String) {
+        organization(login: $org) {
+          repositories(first: $pageSize, after: $cursor) {
+            pageInfo {
+              hasNextPage
+              endCursor
+            }
+            totalCount
+            nodes {
+              name
+
+              # Query for specific file at default branch
+              file: object(expression: "HEAD:${file}") {
+                ... on Blob {
+                  text
+                }
+              }
+
+              # Status and associated PR of a 'branch'
+              ref(qualifiedName: "${branch}") {
+                name
+                prefix
+                associatedPullRequests(last: 1) {
+                  nodes {
+                    number
+                    title
+                  }
+                }
+                target {
+                  ... on Commit {
+                    status {
+                      contexts {
+                        context
+                        state
+                        targetUrl
+                        createdAt
+                      }
+                      state
+                    }
+                  }
+                }
+              }
+
+              # Status of default branch
+              defaultBranchRef {
+                name
+                target {
+                  ... on Commit {
+                    status {
+                      contexts {
+                        context
+                        state
+                        targetUrl
+                        createdAt
+                      }
+                      state
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    `
+    
+    
+    let fetcher = new PagedFetcher<Repository>(paged_query, org);
+    
+    for await (let repo of fetcher.next()) {
+
+        console.log("");
+    }
+}
+
+async function queryRepo(org, repo, file, branch) {
+    const query = `
+    {
+        repository(owner: "${org}", name: "${repo}") {
+          name
+          file: object(expression: "HEAD:${file}") {
+            ... on Blob {
+              text
+            }
+          }
+          ref(qualifiedName: "${branch}") {
+            name
+            prefix
+            associatedPullRequests(last: 1) {
+              nodes {
+                number
+                title
+              }
+            }
+            target {
+              ... on Commit {
+                status {
+                  contexts {
+                    context
+                    state
+                    targetUrl
+                    createdAt
+                  }
+                  state
+                }
+              }
+            }
+          }
+          defaultBranchRef {
+            name
+            target {
+              ... on Commit {
+                status {
+                  contexts {
+                    context
+                    state
+                    targetUrl
+                    createdAt
+                  }
+                  state
+                }
+              }
+            }
+          }
+        }
+      }
+    `
+    
+    
+    let res = await octokit.graphql(query) as any;
+    const data = res.repository as Repository;
+
+    const resJson = JSON.stringify(res, null, 4);
+    console.log(resJson);
+}
+
+
 async function getAllFiles(org, file) {
     const paged_query = `
     query GetRepos($org:String!, $pageSize:Int!, $cursor:String) {
@@ -282,7 +435,11 @@ async function getAllFiles(org, file) {
 
 let org = 'facebook'
 
-await getMetadata(org);
+// await getMetadata(org);
+
+await queryFileAndStatus(org, 'package.json', 'HPHP-2.0');
+// await queryRepo(org, 'react', 'package.json', 'dependabot/npm_and_yarn/fixtures/packaging/browserify/prod/browserify-sign-4.2.2');
+
 // await getAllFiles(org, 'package.json');
 // await getAllFiles(org, 'README.md');
 // await getAllFiles(org, 'CODEOWNERS');
